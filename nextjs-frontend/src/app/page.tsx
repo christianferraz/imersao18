@@ -1,8 +1,8 @@
+import { EventCard } from "../components/EventCard";
 import { Title } from "../components/Title";
 import { EventModel } from "../models";
-import { EventCard } from "../components/EventCard";
 
-export async function getEvents(): Promise<EventModel[]> {
+async function getEvents(): Promise<EventModel[]> {
   const response = await fetch(`${process.env.GOLANG_API_URL}/events`, {
     headers: {
       "apikey": process.env.GOLANG_API_TOKEN as string
@@ -18,7 +18,6 @@ export async function getEvents(): Promise<EventModel[]> {
 
 export default async function HomePage() {
   const events = await getEvents();
-  console.log(events);
   return (
     <main className="mt-10 flex flex-col">
       <Title>Eventos disponíveis</Title>

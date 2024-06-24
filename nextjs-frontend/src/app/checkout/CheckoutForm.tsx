@@ -1,12 +1,16 @@
 "use client";
 
+import crypto from 'crypto';
 import { PropsWithChildren } from "react";
-import { checkoutAction } from "../../actions";
 import { useFormState } from "react-dom";
+import { checkoutAction } from "../../actions";
 import { ErrorMessage } from "../../components/ErrorMessage";
 
-export async function getCardHash({ cardName, cardNumber, expireDate, cvv }) {
-  return Math.random().toString(36).substring(7);
+async function getCardHash({ cardName, cardNumber, expireDate, cvv }: {cardName: string, cardNumber: string, expireDate: string, cvv: string}) {
+  const hash = crypto.createHash('sha256');
+  const data = `${cardName}|${cardNumber}|${expireDate}|${cvv}`;
+  hash.update(data);
+  return hash.digest('hex');
 }
 
 export type CheckoutFormProps = {

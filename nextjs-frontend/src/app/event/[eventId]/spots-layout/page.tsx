@@ -1,12 +1,12 @@
+import { cookies } from "next/headers";
 import Link from "next/link";
+import { EventImage } from "../../../../components/EventImage";
+import { SpotSeat } from "../../../../components/SpotSeat";
 import { Title } from "../../../../components/Title";
 import { EventModel, SpotModel } from "../../../../models";
-import { SpotSeat } from "../../../../components/SpotSeat";
 import { TicketKindSelect } from "./TicketKindSelect";
-import { cookies } from "next/headers";
-import { EventImage } from "../../../../components/EventImage";
 
-export async function getSpots(eventId: string): Promise<{
+async function getSpots(eventId: string): Promise<{
   event: EventModel;
   spots: SpotModel[];
 }> {
